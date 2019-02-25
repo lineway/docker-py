@@ -46,11 +46,17 @@ class Registry:
             return res
 
     def push_image(self, image_name, tag_name):
+
         URL = self.protocol + "://" + self.url + ":" + str(self.port) + "/v2/" + \
             str(image_name) + "/blobs/" + str(tag_name)
 
         res = requests.head(URL)
-        return res 
+        return res
+        # URL = self.protocol + "://" + self.url + ":" + str(self.port) + "/v2/" + \
+        #     str(image_name) + "/blobs/uploads/"
+        
+        # res = requests.post(URL).headers['Location']
+        # return res 
         
 
 if __name__ == "__main__":
