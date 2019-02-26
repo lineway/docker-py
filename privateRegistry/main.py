@@ -15,7 +15,7 @@ class Registry:
         self.url = url
         self.port = port
 
-    def list_image(self):
+    def list_images(self):
         URL = self.protocol + "://" + self.url + ":" + str(self.port) + "/v2/_catalog"
         image_list = requests.get(URL).text
         image_list = json.loads(image_list)['repositories']
@@ -46,20 +46,30 @@ class Registry:
             return res
 
     def push_image(self, image_name, tag_name):
+        pass
 
-        URL = self.protocol + "://" + self.url + ":" + str(self.port) + "/v2/" + \
-            str(image_name) + "/blobs/" + str(tag_name)
+        # HEADERS = {"Accept": "application / vnd.docker.distribution.manifest.v2 + json"}
 
-        res = requests.head(URL)
-        return res
         # URL = self.protocol + "://" + self.url + ":" + str(self.port) + "/v2/" + \
         #     str(image_name) + "/blobs/uploads/"
+
+        # response = requests.post(URL, headers=HEADERS)
+        # headers = response.headers
+
+        # upload_url = headers['Location']
+        # print(headers)
+
+        # response = requests.put(upload_url)
+
+        # return response.text
+        # # URL = self.protocol + "://" + self.url + ":" + str(self.port) + "/v2/" + \
+        # #     str(image_name) + "/blobs/uploads/"
         
-        # res = requests.post(URL).headers['Location']
-        # return res 
+        # # res = requests.post(URL).headers['Location']
+        # # return res 
         
 
 if __name__ == "__main__":
-    print(Registry().push_image(image_name="redis", tag_name="4.0"))
-    print(Registry().list_image())
+    print(Registry().push_image(image_name="redis", tag_name="latest"))
+    print(Registry().list_tag(image_name='redis'))
 
